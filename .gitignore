@@ -1,0 +1,5 @@
+# Ignore compiled bytecode
+*.pyc
+
+# Ignore bytecode caches
+*/__pycache__/*
