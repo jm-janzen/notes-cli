@@ -13,9 +13,13 @@ class CLI:
         command_ctl = CommandCtl()
         command_ctl.execute(self.arg_to_str(args))
 
-    def arg_to_str(self, args):
-        if args.list:
-            return "list"
+    def arg_to_str(self, arg):
+        """ Get string representation of argument,
+        i.e. "args.list" will return "list"
+        :param arg: single argparse.Namespace obj
+        :return arg: string name of obj
+        """
+        return list(vars(arg).keys())[0]
 
     def parse_args(self, argv):  # XXX argv not nessa  :/
         """ Parse and Validate arguments
