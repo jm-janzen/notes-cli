@@ -1,16 +1,17 @@
 import os
 import importlib
 
-from .commands import *
-
 class CommandCtl:
 
+    # Generic holder for scripts in core/commands dir
     scripts = {}
 
     def __init__(self):
         """ Init command packages based on individual scripts in core/commands dir """
+
         # TODO set this globally before getting here
         command_script_dir = os.path.join("notes", "core", "commands")
+
         for command_script in os.listdir(command_script_dir):
             command_script_key = command_script.split('.')[0]
 
@@ -19,9 +20,13 @@ class CommandCtl:
 
     def execute(self, cmd):
         """ Pass argument to individual handlers """
-
+        # Get str ref to command by name
         c = self.scripts.get(cmd)
+
+        # Import by name at std path
         cmd_module = importlib.import_module(f"core.commands.{c}")
+
+        # By convention, call `execute` method of imported cmd script
         cmd_module.execute()
 
     def get_script(self, name):
@@ -30,5 +35,4 @@ class CommandCtl:
         :return scripts[name]: value
         """
         return scripts[name]
-
     
