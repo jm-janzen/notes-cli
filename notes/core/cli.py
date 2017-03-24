@@ -8,12 +8,12 @@ class CLI:
         :param argv: argument(s) to act upon
         """
 
-        args = self.parse_args(argv)
+        args = self._parse_args()
 
         command_ctl = CommandCtl()
-        command_ctl.execute(self.arg_to_str(args))
+        command_ctl.execute(self._arg_to_str(args))
 
-    def arg_to_str(self, arg):
+    def _arg_to_str(self, arg):
         """ Get string representation of argument,
         i.e. "args.list" will return "list"
         :param arg: single argparse.Namespace obj
@@ -21,7 +21,7 @@ class CLI:
         """
         return list(vars(arg).keys())[0]
 
-    def parse_args(self, argv):  # XXX argv not nessa  :/
+    def _parse_args(self):
         """ Parse and Validate arguments
         :param argv: argument(s) from init
         :return args: parsed, validated argument(s)

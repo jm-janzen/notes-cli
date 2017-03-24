@@ -19,7 +19,11 @@ class CommandCtl:
             self.scripts[command_script_key] = command_script_key
 
     def execute(self, cmd):
-        """ Pass argument to individual handlers """
+        """ Pass argument to individual handlers
+
+        XXX BUG this is receiving 'list' on no args from CLI
+
+        """
         # Get str ref to command by name
         c = self.scripts.get(cmd)
 
