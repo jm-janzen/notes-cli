@@ -38,16 +38,17 @@ class Config(metaclass=Singleton):
         editor = cp.get("Interfaces", "Editor")
         viewer = cp.get("Interfaces", "Viewer")
 
-        # TODO Get accepted topic extensions and ignore-patterns
+        # Get accepted topic extensions
+        topic_exts = list(map(str.strip, cp.get("TopicPrefs", "Extensions").split(',')))
 
         # Bundle all in obj and ret
         return {
             "notes_dir": notes_dir,
             "editor": editor,
             "viewer": viewer,
-            "prefs:": {
+            "prefs": {
                 "topic": {
-                    "extensions": "",
+                    "extensions": topic_exts,
                     "ignore_pats": "",
                 },
                 "subject": {

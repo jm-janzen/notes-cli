@@ -7,7 +7,9 @@ def execute():
     """ Print notes subjects, topics """
 
     # Fetch notes dir from singleton
-    notes_dir = Config().opts["notes_dir"]
+    config    = Config()
+    notes_dir = config.opts["notes_dir"]
+    topic_exts= config.opts["prefs"]["topic"]["extensions"]
 
     # FIXME maybe better idea to build notes (subject, topics) objects elsewhere,
     # since it is fundamental to this package.
@@ -27,6 +29,10 @@ def execute():
 
             # Skip unparsable files
             if len(topic_arr) != 2:
+                continue
+
+            # Skip files not in config ext whitelist
+            if not topic_arr[-1] in topic_exts:
                 continue
 
             if _is_hidden(topic):
