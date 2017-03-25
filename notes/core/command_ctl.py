@@ -21,7 +21,8 @@ class CommandCtl:
     def execute(self, cmd):
         """ Pass argument to individual handlers
 
-        XXX BUG this is receiving 'list' on no args from CLI
+        XXX BUG this is receiving 'list' on no args from CLI,
+        due to false positive from "list=False" X(
 
         """
         # Get str ref to command by name
@@ -37,6 +38,9 @@ class CommandCtl:
         """ Get script ref of a certain name
         :param name: key
         :return scripts[name]: value
+
+        FIXME this is presently unused
+
         """
         return scripts[name]
     

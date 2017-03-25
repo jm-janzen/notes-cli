@@ -30,6 +30,10 @@ class CLI:
         """ Parse and Validate arguments
         :param argv: argument(s) from init
         :return args: parsed, validated argument(s)
+
+
+        TODO replace "help" here with samesuch method of command
+
         """
         parser = argparse.ArgumentParser()
 
