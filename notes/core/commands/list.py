@@ -1,13 +1,13 @@
 import os
 import termcolor
 
+from .. config import Config
 
 def execute():
     """ Print notes subjects, topics """
 
-    # TODO determine this globally before getting here
-    notes_dir = os.path.join(os.path.expanduser('~'),
-                             "notes")
+    # Fetch notes dir from singleton
+    notes_dir = Config().opts["notes_dir"]
 
     # FIXME maybe better idea to build notes (subject, topics) objects elsewhere,
     # since it is fundamental to this package.
