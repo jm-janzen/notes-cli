@@ -19,7 +19,12 @@ class CLI:
         :param arg: single argparse.Namespace obj
         :return arg: string name of obj
         """
-        return list(vars(arg).keys())[0]
+        # Iterate over key=name, val=bool
+        for key, val in list(vars(arg).items()):
+
+            # Return first True flag
+            if val:
+                return key
 
     def _parse_args(self):
         """ Parse and Validate arguments
@@ -30,6 +35,9 @@ class CLI:
 
         parser.add_argument("-l", "--list",
                             help="list all notes",
+                            action="store_true")
+        parser.add_argument("-L", "--long-list",
+                            help="[UNIMPLEMENTED] list all notes, with more detail",
                             action="store_true")
 
         return parser.parse_args()
