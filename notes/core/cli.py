@@ -18,6 +18,9 @@ class CLI:
         i.e. "args.list" will return "list"
         :param arg: single argparse.Namespace obj
         :return arg: string name of obj
+
+        FIXME this is probably dumb, and should be replaced
+              elsewhere with if-elif structure.
         """
         # Iterate over key=name, val=bool
         for key, val in list(vars(arg).items()):
