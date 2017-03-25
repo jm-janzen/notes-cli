@@ -4,7 +4,11 @@ import termcolor
 from .. config import Config
 
 def execute():
-    """ Print notes subjects, topics """
+    """ Print notes subjects, topics
+
+    TODO alphabetise, investigate columnar output
+
+    """
 
     # Fetch notes dir from singleton
     config    = Config()
