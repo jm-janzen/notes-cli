@@ -40,6 +40,11 @@ class CLI:
         """
         parser = argparse.ArgumentParser()
 
+        parser.add_argument("topic",
+                            help="topic to view",
+                            type=str,
+                            nargs='?')
+
         parser.add_argument("-l", "--list",
                             help="list all notes",
                             action="store_true")
