@@ -11,12 +11,34 @@ class Config(metaclass=Singleton):
         self.opts = self._build(path)
 
     def _build(self, path):
-        """ Using config at path, build config singleton
+        """ Using config at path, build config singleton """
+        # Get temporary configuration obj for validation
+        c = self._read_in(path)
 
-        TODO either move build validation here, or rm this middleman func.
+        # Check notes dir exists
+        if not os.path.isdir(c["notes_dir"]):
+            raise FileNotFoundError(f"{c['notes_dir']} is not a directory")
 
-        """
-        return self._read_in(path)
+        # Check editor exists
+        if not os.path.isfile(c["editor"]):
+            raise FileNotFoundError(f"{c['editor']} is not a file")
+
+        # Check editor is set as executable
+        if not os.access(c["editor"], os.X_OK):
+            raise Exception(f"{c['editor']} is not executable")
+
+        # Check viewer exists
+        if not os.path.isfile(c["viewer"]):
+            raise FileNotFoundError(f"{c['viewer']} is not a file")
+
+        # Check viewer is set as executable
+        if not os.access(c["viewer"], os.X_OK):
+            raise Exception(f"{c['viewer']} is not executable")
+
+        # TODO validate regex ignore patterns
+
+        # Return fully validated configuration
+        return c
 
     def _read_in(self, path):
         """ Read in config at path and ret basic config object """
@@ -29,7 +51,7 @@ class Config(metaclass=Singleton):
 
         # Get preferred interfaces for viewing/editing topics
         editor = cp.get("Interfaces", "Editor")
-        viewer = cp.get("Interfaces", "Viewer")
+        viewer = cp.get("Interfaces", "Viewer")  # Ie. pager
 
         # Get accepted topic extensions
         topic_exts = list(map(str.strip, cp.get("TopicPrefs", "Extensions").split(',')))
