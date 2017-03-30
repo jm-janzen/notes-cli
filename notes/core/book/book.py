@@ -8,7 +8,14 @@ class Book(metaclass=Singleton):
     Example obj fmt:
 
         Book = {
-            subjects: [ linux ... ],
+            index: {  // flat, no relations
+                topics:  [ arch ... ],
+                subjects: [ linux ... ],  // Fill in desc from file later
+            },
+            root: {  // master "notes" subject
+                subjects: [ linux ... ],
+                topics:  [ arch ... ],
+            }
         }
 
         Subject = {

@@ -9,34 +9,57 @@ class BookBuilder():
     """ TODO build and return book obj Subjects, Topics """
 
     # TODO populate
-    book = { "subjects": [] }
+    #book = { "subjects": [] }
+    book = {
+            "index": {  # Flat list
+                "subjects": [],
+                "topics": [],
+                },
+            "root": {  # Associations
+                "subjects": [],
+                "topics": [],
+                },
+            }
+
 
     def __init__(self):
-        """ TODO using config, build book object from notes dir """
+        """ TODO using config, build book object from notes dir
+        3 stage process:
+            - 1. Build flat "index" of all subjects, topics, with no relations
+            - 2. Build "root" subject from notes_dir in config
+            - 3. Above iters over files, dirs - building associated Topics, Subjects
+                 as appropriate.
+        """
 
         # Fetch notes dir from singleton
         config    = Config()
         notes_dir = config.opts["notes_dir"]
         topic_exts= config.opts["prefs"]["topic"]["extensions"]
 
-        # FIXME maybe better idea to build notes (subject, topics) objects elsewhere,
-        # since it is fundamental to this package.
+        #
+        # Step 1. Build flat "index"
+        #
+
         for curr, dirs, topics in os.walk(notes_dir):
 
             # Skip all if we're in a hidden path
             if self._is_hidden(curr):
                 continue
 
-            depth = len(curr.split(os.sep)) - len(notes_dir.split(os.sep))
-            print(depth, curr)
-
-            # Get name of current dir
-            #self.book["subjects"].append(Subject(curr)) # FIXME maybe pass topics[] in here
+            """ XXX ignoring topics for now
             topic_obj_arr = []
             for topic in topics:
                 topic_obj_arr.append(Topic(os.path.join(curr, topic)))
-            self.book["subjects"].append(Subject(curr, topic_obj_arr)) # FIXME maybe pass topics[] in here
+            """
 
+            self.book["index"]["subjects"].append(Subject(curr)) # FIXME maybe pass topics[] in here
+
+        #
+        # Step 2. Build "root" subject
+        #
+
+        for curr, dirs, topics in os.walk(notes_dir):
+            pass
             """
             for topic in topics:
                 topic_arr = topic.split('.')

@@ -40,16 +40,17 @@ class CLI:
         """
         parser = argparse.ArgumentParser()
 
-        parser.add_argument("topic",
-                            help="topic to view",
-                            type=str,
-                            nargs='?')
-
         parser.add_argument("-l", "--list",
                             help="list all notes",
                             action="store_true")
         parser.add_argument("-L", "--long-list",
                             help="[UNIMPLEMENTED] list all notes, with more detail",
+                            action="store_true")
+        parser.add_argument("-T", "--topic-list",
+                            help="[UNIMPLEMENTED] list all topics",
+                            action="store_true")
+        parser.add_argument("-S", "--subject-list",
+                            help="[UNIMPLEMENTED] list all subjects",
                             action="store_true")
 
         return parser.parse_args()
