@@ -8,14 +8,8 @@ from .. config import Config
 class BookBuilder():
     """ TODO build and return book obj Subjects, Topics """
 
-    # TODO populate
-    #book = { "subjects": [] }
     book = {
-            "index": {  # Flat list
-                "subjects": [],
-                "topics": [],
-                },
-            "root": {  # Associations
+            "index": {  # Special "root" subject
                 "subjects": [],
                 "topics": [],
                 },
@@ -24,10 +18,9 @@ class BookBuilder():
 
     def __init__(self):
         """ TODO using config, build book object from notes dir
-        3 stage process:
-            - 1. Build flat "index" of all subjects, topics, with no relations
-            - 2. Build "root" subject from notes_dir in config
-            - 3. Above iters over files, dirs - building associated Topics, Subjects
+        2 stage process:
+            - 1. Build "index" of all subjects, topics, with no relations
+            - 2. Above iters over files, dirs - building associated Topics, Subjects
                  as appropriate.
         """
 
@@ -46,21 +39,10 @@ class BookBuilder():
             if self._is_hidden(curr):
                 continue
 
-            """ XXX ignoring topics for now
-            topic_obj_arr = []
-            for topic in topics:
-                topic_obj_arr.append(Topic(os.path.join(curr, topic)))
-            """
+            self.book["index"]["subjects"].append(Subject(curr))
 
-            self.book["index"]["subjects"].append(Subject(curr)) # FIXME maybe pass topics[] in here
-
-        #
-        # Step 2. Build "root" subject
-        #
-
+        """ TODO push topics to individual subjects here, rather than having Subject do it
         for curr, dirs, topics in os.walk(notes_dir):
-            pass
-            """
             for topic in topics:
                 topic_arr = topic.split('.')
 

@@ -11,8 +11,8 @@ class Topic():
     """
 
     def __init__(self, path):
-        """ TODO Build topic obj from full path """
-        print(f"new Topic({path})")
+        """ Build topic obj from full path """
+        #print(f"new Topic({path})")
 
         topc_arr = path.split('/')
         name_arr = topc_arr[-1].split('.')  # XXX will crash on files without .

@@ -7,6 +7,7 @@ from . topic import Topic
 
 class Subject():
     """
+    TODO update this doc
     Subject = {
         linux: {
             parent_subject: notes,
@@ -20,7 +21,7 @@ class Subject():
 
     def __init__(self, path):
         """ Build subject obj from full path """
-        print(f"new Subject({path})")
+        #print(f"new Subject({path})")
 
         subj_arr = path.split(os.sep)
 
@@ -51,7 +52,7 @@ class Subject():
 
 
     def _build_subjects(self, path):
-        """ TODO return list of subjects in subject """
+        """ Return list of subjects in subject """
         dirs = []
         for file in os.listdir(path):
 

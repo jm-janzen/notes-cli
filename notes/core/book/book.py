@@ -3,21 +3,14 @@ from . book_builder import BookBuilder
 
 
 class Book(metaclass=Singleton):
-    """ TODO interface to book obj (notes dir)
-
+    """ Interface to book obj (notes dir)
     Example obj fmt:
-
         Book = {
-            index: {  // flat, no relations
+            index: {
                 topics:  [ arch ... ],
-                subjects: [ linux ... ],  // Fill in desc from file later
-            },
-            root: {  // master "notes" subject
                 subjects: [ linux ... ],
-                topics:  [ arch ... ],
-            }
+            },
         }
-
         Subject = {
             linux: {
                 parent_subject: notes,
@@ -35,7 +28,6 @@ class Book(metaclass=Singleton):
                 name:           arch,
             }
         }
-        
     """
 
     def __new__(self):
