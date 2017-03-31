@@ -18,12 +18,12 @@ def main():
         exit(1)
 
     # Validate items in notes directory, init Book singleton
-    try:
-        Book()
+    #try:
+    Book()
 
-    except Exception as e:
-        print(f"ERROR: {e}\n")
-        exit(1)
+    #except Exception as e:
+    #    print(f"ERROR: {e}\n")
+    #    exit(1)
 
     # Pass args to our CLI module and execute
     CLI(sys.argv)

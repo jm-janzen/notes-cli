@@ -1,3 +1,5 @@
+from .. config import Config
+
 class Topic():
     """
     Topic = {
@@ -8,14 +10,25 @@ class Topic():
             ext:            mkd,
         }
     }
+
+    TODO Fix newline at the beginning of output
+
     """
 
     def __init__(self, path):
         """ Build topic obj from full path """
         #print(f"new Topic({path})")
 
-        topc_arr = path.split('/')
-        name_arr = topc_arr[-1].split('.')  # XXX will crash on files without .
+        # Fetch acceptable extensions from config
+        topic_exts= Config().opts["prefs"]["topic"]["extensions"]
+
+        topc_arr = path.split('/')[-2:]
+        name_arr  = topc_arr[-1].split('.')
+
+        # Skip unparsable files
+        if len(name_arr) != 2:
+            # FIXME include option/instruction to add to config ignore list
+            raise Exception(f"Could not build new Topic using {path}")
 
         path = path
         name = name_arr[0]
@@ -24,7 +37,11 @@ class Topic():
         else:
             ext = ''
 
-        parent = topc_arr[-2]
+        # Skip files not in config ext whitelist
+        if not ext in topic_exts:
+            raise Exception(f"Skipping Topic {path} because extension is being ignored")
+
+        parent = topc_arr[-2]  # subject
 
         self.path = path
         self.name = name
