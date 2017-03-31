@@ -33,13 +33,21 @@ class BookBuilder():
         # Step 1. Build flat "index"
         #
 
-        for curr, dirs, topics in os.walk(notes_dir):
+        for curr, dirs, files in os.walk(notes_dir):
 
             # Skip all if we're in a hidden path
             if self._is_hidden(curr):
                 continue
 
-            self.book["index"]["subjects"].append(Subject(curr))
+            # Build Subject for Book
+            subject_cls = Subject(curr)
+
+            # Append files here to Subject's child Topics
+            for file in files:
+                subject_cls.add_topic(os.path.join(curr, file))
+
+            # Append Subject to Book
+            self.book["index"]["subjects"].append(subject_cls)
 
         """ TODO push topics to individual subjects here, rather than having Subject do it
         for curr, dirs, topics in os.walk(notes_dir):
