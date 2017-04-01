@@ -21,10 +21,13 @@ class CommandCtl:
     def execute(self, cmd):
         """ Pass argument to individual handlers
 
-        XXX BUG this is receiving 'list' on no args from CLI,
-        due to false positive from "list=False" X(
+        TODO handle multiple arguments, and positional arguments
+             which should be passed to individual commands. Eg:
+             `notes --edit linux arch`.
 
         """
+        print(f"CommandCtl::execute({cmd})")
+
         # Get str ref to command by name
         c = self.scripts.get(cmd)
 

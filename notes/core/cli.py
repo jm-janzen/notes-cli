@@ -1,4 +1,5 @@
 import argparse
+import sys
 
 from .command_ctl import CommandCtl
 
@@ -8,7 +9,9 @@ class CLI:
         :param argv: argument(s) to act upon
         """
 
-        args = self._parse_args()
+        print("A:",argv)
+        args = self._parse_args(argv)
+        print("B:",args)
 
         command_ctl = CommandCtl()
         command_ctl.execute(self._arg_to_str(args))
@@ -21,15 +24,19 @@ class CLI:
 
         FIXME this is probably dumb, and should be replaced
               elsewhere with if-elif structure.
+
         """
         # Iterate over key=name, val=bool
         for key, val in list(vars(arg).items()):
 
-            # Return first True flag
-            if val:
-                return key
+            print(key, val)
 
-    def _parse_args(self):
+            # Check if singular arg is just a flag and return first on
+            if type(val) is bool:
+                if val:
+                    return key
+
+    def _parse_args(self, argv):
         """ Parse and Validate arguments
         :param argv: argument(s) from init
         :return args: parsed, validated argument(s)
@@ -40,6 +47,10 @@ class CLI:
         """
         parser = argparse.ArgumentParser()
 
+        parser.add_argument("-e", "--edit",
+                            help="edit given item (topic)",
+                            type=str,
+                            nargs=1)
         parser.add_argument("-l", "--list",
                             help="list all notes",
                             action="store_true")
@@ -52,6 +63,11 @@ class CLI:
         parser.add_argument("-S", "--subject-list",
                             help="[UNIMPLEMENTED] list all subjects",
                             action="store_true")
+
+        # If no arguments, just print usage and exit
+        if len(argv) <= 1:
+            parser.print_help()
+            parser.exit()
 
         return parser.parse_args()
 
