@@ -2,7 +2,7 @@
 
 ### High-Level Project Layout
 
-```
+```bash
 notes-cli/
 ├── notes/                  # Entrypoint  src
 │   ├── core/               # Application src
