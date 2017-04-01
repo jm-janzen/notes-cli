@@ -17,3 +17,11 @@ notes-cli/
 ├── README.mkd              # This document
 └── requirements.txt        # Application requirements
 ```
+
+### Basic Control Flow
+```bash
+main.py vec *argv                                # Build Book, Config
+    `--> cli.py vec namespace args               # Build help, usage; parse *argv (check is valid)
+        `--> command_ctl.py str[] command, parms # Build commands, parse *argv grammar (check is logical)
+            `--> commands/<command>.py [parms]   # Execute command using given parms (if any)
+```
