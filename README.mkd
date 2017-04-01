@@ -1,1 +1,19 @@
 # Notes CLI
+
+### High-Level Project Layout
+
+```
+notes-cli/
+├── notes/                  # Entrypoint  src
+│   ├── core/               # Application src
+│   │   ├── book/           # Abstraction of notes dir
+│   │   ├── commands/       # CLI command scripts (1 per)
+│   │   ├── utils/          # Generic helper modules
+│   │   ├── cli.py          # CLI parser, consumer: command_ctl
+│   │   ├── command_ctl.py  # Abstraction of commands/*
+│   │   └── config.py       # Abstraction of config.cfg
+│   ├── config.cfg          # Application configurations (plain text)
+│   └── main.py             # Entrypoint
+├── README.mkd              # This document
+└── requirements.txt        # Application requirements
+```
