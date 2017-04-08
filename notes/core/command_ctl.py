@@ -18,7 +18,22 @@ class CommandCtl:
             # FIXME gotta be a more elegant way
             self.scripts[command_script_key] = command_script_key
 
-    def execute(self, cmd):
+    def run(self, args):
+        """ TODO parse args into (cmd, **args) for _execute """
+        print(f"CommandCtl::run({args})")
+        cmd, args = self._parse_args(args)
+
+        self._execute(cmd, args)
+
+    def _parse_args(self, args):
+        """ TODO separate cmd from *args, and ret """
+        print(f"CommandCtl::_parse_args({args})")
+        
+        cmd, args = list(args.keys())[0], list(args.values())[0]
+
+        return cmd, args
+
+    def _execute(self, cmd, *args):
         """ Pass argument to individual handlers
 
         TODO handle multiple arguments, and positional arguments
@@ -26,7 +41,7 @@ class CommandCtl:
              `notes --edit linux arch`.
 
         """
-        print(f"CommandCtl::execute({cmd})")
+        print(f"CommandCtl::_execute({cmd}, {args})")
 
         # Get str ref to command by name
         c = self.scripts.get(cmd)

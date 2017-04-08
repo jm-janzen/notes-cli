@@ -9,12 +9,30 @@ class CLI:
         :param argv: argument(s) to act upon
         """
 
-        print("A:",argv)
         args = self._parse_args(argv)
-        print("B:",args)
+        args = self._trim_args(args)
 
         command_ctl = CommandCtl()
-        command_ctl.execute(self._arg_to_str(args))
+        command_ctl.run(args)
+
+    def _trim_args(self, args):
+        """ Take argparse namespace and rm untrue args
+        :param args: namespace obj to trim
+        :return args: just the remaining dict
+        """
+
+        # Collect attributes for deletion
+        rm_me = []
+        for k, v in args.__dict__.items():
+            if v is False or v is None:
+                #print(f"del {k} {args.__dict__[k]}")
+                rm_me.append(k)
+
+        # Delete them
+        for rm in rm_me:
+            delattr(args, rm)
+
+        return args.__dict__
 
     def _arg_to_str(self, arg):
         """ Get string representation of argument,
@@ -50,7 +68,7 @@ class CLI:
         parser.add_argument("-e", "--edit",
                             help="edit given item (topic)",
                             type=str,
-                            nargs=1)
+                            nargs='+')
         parser.add_argument("-l", "--list",
                             help="list all notes",
                             action="store_true")

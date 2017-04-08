@@ -3,6 +3,9 @@ import os
 from configparser import ConfigParser
 from . utils.singleton import Singleton
 
+#
+# TODO allow passing of new config (for testing)
+#
 
 class Config(metaclass=Singleton):
 
@@ -71,6 +74,10 @@ class Config(metaclass=Singleton):
                 }
             }
         }
+
+    def new_config(self, new_path):
+        """ TODO use file at new path as new configuration """
+        pass
 
     def write_out(self, path, opts):
         """ TODO Write out a new config file at path, using given opts """
