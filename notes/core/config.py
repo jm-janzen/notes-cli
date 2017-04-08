@@ -1,4 +1,5 @@
 import os
+import re
 
 from configparser import ConfigParser
 from . utils.singleton import Singleton
@@ -74,6 +75,10 @@ class Config(metaclass=Singleton):
                 }
             }
         }
+
+    def topic_extensions_pat(self):
+        """ Return regex pattern matching any acceptable topic file extension """
+        return re.compile('|'.join(self.opts["prefs"]["topic"]["extensions"]))
 
     def new_config(self, new_path):
         """ TODO use file at new path as new configuration """

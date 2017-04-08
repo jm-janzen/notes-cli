@@ -33,7 +33,7 @@ class CommandCtl:
 
         return cmd, args
 
-    def _execute(self, cmd, *args):
+    def _execute(self, cmd, args):
         """ Pass argument to individual handlers
 
         TODO handle multiple arguments, and positional arguments
@@ -50,7 +50,7 @@ class CommandCtl:
         cmd_module = importlib.import_module(f"core.commands.{c}")
 
         # By convention, call `execute` method of imported cmd script
-        cmd_module.execute()
+        cmd_module.execute(args)
 
     def get_script(self, name):
         """ Get script ref of a certain name

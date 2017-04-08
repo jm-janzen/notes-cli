@@ -2,7 +2,7 @@ import os
 
 from .. book.book import Book
 
-def execute():
+def execute(args):
     """ Print flat list of all topics """
     prt_str = ''
     for subject in Book()["index"]["subjects"]:
