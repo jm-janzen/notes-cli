@@ -13,7 +13,7 @@ new_topic_ext = config.opts["prefs"]["topic"]["new_topic_ext"]
 
 def execute(args):
     """ Create [SUBJECTS...] <TOPIC> specified, if not found """
-    print(f"create::execute({type(args)} {args})")
+    #print(f"create::execute({type(args)} {args})")
 
     try_name = args[-1]
     try_dir  = os.path.join(notes_dir, *args[:-1])

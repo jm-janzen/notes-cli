@@ -12,8 +12,7 @@ notes_dir = config.opts["notes_dir"]
 topic_exts= config.opts["prefs"]["topic"]["extensions"]
 
 def execute(args):
-    """ Edit given topic file using editor in config.cfg
-    """
+    """ Edit given topic file using editor in config.cfg """
     #print(f"edit({type(args)} {args})")
 
     try_name = args[-1]
