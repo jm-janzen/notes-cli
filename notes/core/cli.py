@@ -21,12 +21,20 @@ class CLI:
         :param args: namespace obj to trim
         :return args: just the remaining dict
         """
+        #print(f"cli::_trim_args({args})")
 
         # Collect attributes for deletion
         rm_me = []
         for k, v in args.__dict__.items():
+
+            # rm missing of false flags
             if v is False or v is None:
                 rm_me.append(k)
+
+            # rm empty lists (for positional args)
+            elif isinstance(v, list):
+                if len(v) < 1:
+                    rm_me.append(k)
 
         # Delete them
         for rm in rm_me:
@@ -45,6 +53,11 @@ class CLI:
         """
         parser = argparse.ArgumentParser()
 
+        parser.add_argument("view",
+                            help="view topic using pager in config",
+                            metavar="topic_path",
+                            type=str,
+                            nargs='*')
         parser.add_argument("-e", "--edit",
                             help="edit given item (topic)",
                             type=str,
