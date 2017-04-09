@@ -3,7 +3,7 @@ import time
 
 from .. book.book import Book
 
-def execute():
+def execute(args):
     """ Print associated list of subjects and their topics """
     for subject in Book()["index"]["subjects"]:
 

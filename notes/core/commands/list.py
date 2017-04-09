@@ -3,7 +3,7 @@ import termcolor
 
 from .. config import Config
 
-def execute():
+def execute(args):
     """ Print notes subjects, topics
 
     TODO alphabetise, investigate columnar output

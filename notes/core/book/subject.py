@@ -30,25 +30,17 @@ class Subject():
         self.name     = subj_arr[-1]
         self.parent   = subj_arr[-2]
         self.children = {
-            "topics": self._build_topics(path),  # FIXME make "push" method and add from book_builder
-                                                 # then will only need to check for hidden, pats once
+            "topics": [],  # Populated using method add_topic
             "subjects": self._build_subjects(path),
         }
 
-    def _build_topics(self, path):
-        """ Return list of topics in subject """
-        files = []
-        for file in os.listdir(path):
 
-            file_path = os.path.join(path, file)
-
-            if fileops._is_hidden(file):
-                continue
-
-            if os.path.isfile(file_path):
-                files.append(Topic(file_path))
-
-        return files
+    def add_topic(self, path):
+        """ Given path to file, add instance of Topic to this Subject """
+        # XXX if new instance does not quack, it is of no use to us
+        new_topic = Topic(path)
+        if new_topic.quack:
+            self.children["topics"].append(new_topic)
 
 
     def _build_subjects(self, path):
