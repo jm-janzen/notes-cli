@@ -14,7 +14,7 @@ def main():
 
     # If failure in configuration, don't even
     except Exception as e:
-        print(f"ERROR: {e}")
+        print(f"Error reading config.cfg:\n{e}")
         exit(1)
 
     # Validate items in notes directory, init Book singleton
@@ -22,7 +22,7 @@ def main():
         Book()
 
     except Exception as e:
-        print(f"ERROR: {e}\n")
+        print(f"Error building notes dir:\n{e}")
         exit(1)
 
     # Pass args to our CLI module and execute

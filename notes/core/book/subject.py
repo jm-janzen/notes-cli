@@ -34,14 +34,12 @@ class Subject():
             "subjects": self._build_subjects(path),
         }
 
+
     def add_topic(self, path):
         """ Given path to file, add instance of Topic to this Subject """
-        #print(f"{self.name}: add_topic({path})")
-
-        # XXX ctor returns None, rather than raising exception
-        # in order to warn consumer not to use this instance.
+        # XXX if new instance does not quack, it is of no use to us
         new_topic = Topic(path)
-        if not new_topic is None:
+        if new_topic.quack:
             self.children["topics"].append(new_topic)
 
 

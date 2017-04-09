@@ -20,18 +20,16 @@ class CommandCtl:
 
     def run(self, args):
         """ TODO parse args into (cmd, **args) for _execute """
-        print(f"CommandCtl::run({args})")
+        #print(f"CommandCtl::run({args})")
         cmd, args = self._parse_args(args)
 
         self._execute(cmd, args)
 
     def _parse_args(self, args):
         """ TODO separate cmd from *args, and ret """
-        print(f"CommandCtl::_parse_args({args})")
-        
-        cmd, args = list(args.keys())[0], list(args.values())[0]
+        #print(f"CommandCtl::_parse_args({args})")
 
-        return cmd, args
+        return list(args.keys())[0], list(args.values())[0]
 
     def _execute(self, cmd, args):
         """ Pass argument to individual handlers
@@ -41,7 +39,7 @@ class CommandCtl:
              `notes --edit linux arch`.
 
         """
-        print(f"CommandCtl::_execute({cmd}, {args})")
+        #print(f"CommandCtl::_execute({cmd}, {args})")
 
         # Get str ref to command by name
         c = self.scripts.get(cmd)

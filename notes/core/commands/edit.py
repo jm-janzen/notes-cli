@@ -13,10 +13,6 @@ topic_exts= config.opts["prefs"]["topic"]["extensions"]
 
 def execute(args):
     """ Edit given topic file using editor in config.cfg
-    for subject in Book()["index"]["subjects"]:
-
-        for topic in subject.children["topics"]:
-            pass
     """
     #print(f"edit({type(args)} {args})")
 
@@ -31,31 +27,26 @@ def execute(args):
     exts_pat = config.topic_extensions_pat()
 
     #
-    # FIXME use book, rather than os
+    # FIXME use get_topic method, rather than iter
     #
-
-    # Look for given file in presumed dir
     found_file = None
-    for file in os.listdir(try_dir):
+    for subject in Book()["index"]["subjects"]:
 
-        file_name, file_ext = file.split('.')[0], file.split('.')[-1]
+        for topic in subject.children["topics"]:  # XXX no children
+            if not topic.name == try_name:
+                continue
 
-        if not try_name == file_name:
-            continue
+            # Open file for editing, and quit
+            found_file = topic.path
 
-        if exts_pat.match(file_ext):
-            found_file = os.path.join(try_dir, file)
-
-    # TODO create new file instead of printing this message
     if found_file is None:
-        print(f"Could not find topic file for {try_path}")
-
-    # Open existing file for editing
+        print(f"Could not find topic file matching {try_path}.*")
     else:
         _open_file(found_file)
 
+
 def _open_file(f):
-    """ TODO open file at path in editor in config
+    """ Open file at path in editor in config
     1) copy existing file to temp file
     2) open this temp file in editor
     3) save updates to temp file over og file
