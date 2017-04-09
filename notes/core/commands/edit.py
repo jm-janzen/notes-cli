@@ -86,8 +86,8 @@ def _open_file(f):
     #
     # 3) Copy edits to original file, and remove temporary file
     #
-    #print(f"copying {tmp_file_path} over {f}")
     shutil.copy2(tmp_file_path, f)
+    print(f"Changes to {f} saved")
 
     # Delete temp file
     os.remove(tmp_file_path)

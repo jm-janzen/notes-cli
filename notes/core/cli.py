@@ -15,6 +15,7 @@ class CLI:
         command_ctl = CommandCtl()
         command_ctl.run(args)
 
+
     def _trim_args(self, args):
         """ Take argparse namespace and rm untrue args
         :param args: namespace obj to trim
@@ -25,7 +26,6 @@ class CLI:
         rm_me = []
         for k, v in args.__dict__.items():
             if v is False or v is None:
-                #print(f"del {k} {args.__dict__[k]}")
                 rm_me.append(k)
 
         # Delete them
@@ -34,31 +34,11 @@ class CLI:
 
         return args.__dict__
 
-    def _arg_to_str(self, arg):
-        """ Get string representation of argument,
-        i.e. "args.list" will return "list"
-        :param arg: single argparse.Namespace obj
-        :return arg: string name of obj
-
-        FIXME this is probably dumb, and should be replaced
-              elsewhere with if-elif structure.
-
-        """
-        # Iterate over key=name, val=bool
-        for key, val in list(vars(arg).items()):
-
-            print(key, val)
-
-            # Check if singular arg is just a flag and return first on
-            if type(val) is bool:
-                if val:
-                    return key
 
     def _parse_args(self, argv):
         """ Parse and Validate arguments
         :param argv: argument(s) from init
         :return args: parsed, validated argument(s)
-
 
         TODO replace "help" here with samesuch method of command
 
@@ -73,13 +53,15 @@ class CLI:
                             help="list all notes",
                             action="store_true")
         parser.add_argument("-L", "--long-list",
-                            help="[UNIMPLEMENTED] list all notes, with more detail",
+                            help="list all notes, with more detail",
                             action="store_true")
+
+        # FIXME consider making these switches to --list arg instead of their own thing
         parser.add_argument("-T", "--topic-list",
-                            help="[UNIMPLEMENTED] list all topics",
+                            help="list all topics",
                             action="store_true")
         parser.add_argument("-S", "--subject-list",
-                            help="[UNIMPLEMENTED] list all subjects",
+                            help="list all subjects",
                             action="store_true")
 
         # If no arguments, just print usage and exit
