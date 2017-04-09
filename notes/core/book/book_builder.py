@@ -16,6 +16,7 @@ class BookBuilder():
     book = {
             "index": {  # Special "root" subject
                 "subjects": [],
+                "topics": [],
                 },
             }
 
@@ -38,6 +39,11 @@ class BookBuilder():
             # Append files here to Subject's child Topics
             for file in files:
                 subject_cls.add_topic(os.path.join(curr, file))
+
+                # While here, append topics to flat list in index
+                topic_cls = Topic(os.path.join(curr, file))
+                if topic_cls.quack:
+                    self.book["index"]["topics"].append(topic_cls)
 
             # Append Subject class obj to Book
             self.book["index"]["subjects"].append(subject_cls)

@@ -58,6 +58,11 @@ class CLI:
                             metavar="topic_path",
                             type=str,
                             nargs='*')
+        parser.add_argument("-f", "--find",
+                            help="display topics with given str in them",
+                            metavar="search_str",
+                            type=str,
+                            nargs='+')
         parser.add_argument("-e", "--edit",
                             help="edit given item (topic)",
                             type=str,
