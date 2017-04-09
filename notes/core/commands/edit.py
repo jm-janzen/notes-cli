@@ -24,15 +24,13 @@ def execute(args):
     if not os.path.isdir(try_dir):
         raise FileNotFoundError(f"{try_dir} is not a subject/directory")
 
-    exts_pat = config.topic_extensions_pat()
-
     #
     # FIXME use get_topic method, rather than iter
     #
     found_file = None
     for subject in Book()["index"]["subjects"]:
 
-        for topic in subject.children["topics"]:  # XXX no children
+        for topic in subject.children["topics"]:
             if not topic.name == try_name:
                 continue
 
