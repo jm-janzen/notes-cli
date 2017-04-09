@@ -39,8 +39,9 @@ def execute(args):
 
     if found_file is None:
         print(f"Could not find topic file matching {try_path}.*")
-    else:
-        _open_file(found_file)
+        exit(1)
+
+    _open_file(found_file)
 
 
 def _open_file(f):

@@ -59,6 +59,7 @@ class Config(metaclass=Singleton):
 
         # Get accepted topic extensions
         topic_exts = list(map(str.strip, cp.get("TopicPrefs", "Extensions").split(',')))
+        new_topic_ext = cp.get("TopicPrefs", "NewTopicExtension")
 
         # Bundle all in obj and ret
         return {
@@ -68,6 +69,7 @@ class Config(metaclass=Singleton):
             "prefs": {
                 "topic": {
                     "extensions": topic_exts,
+                    "new_topic_ext": new_topic_ext,
                     "ignore_pats": "",
                 },
                 "subject": {

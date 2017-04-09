@@ -67,6 +67,10 @@ class CLI:
                             help="edit given item (topic)",
                             type=str,
                             nargs='+')
+        parser.add_argument("-c", "--create",
+                            help="create given [subjects...] <topic>",
+                            type=str,
+                            nargs='+')
         parser.add_argument("-l", "--list",
                             help="list all notes",
                             action="store_true")
