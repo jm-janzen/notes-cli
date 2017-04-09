@@ -31,5 +31,16 @@ class Book(metaclass=Singleton):
     """
 
     def __new__(self):
-        return BookBuilder().new_book()
+        self._book = BookBuilder().new_book()
+        return self._book
+
+
+    def get_topic(t):
+        """ TODO return topic obj at given path obj """
+        return t
+
+
+    def get_subject(s):
+        """ TODO return subject obj at given path obj """
+        return s
 

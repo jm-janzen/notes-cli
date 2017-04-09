@@ -37,32 +37,12 @@ class Subject():
     def add_topic(self, path):
         """ Given path to file, add instance of Topic to this Subject """
         #print(f"{self.name}: add_topic({path})")
-        try:
-            new_topic = Topic(path)
+
+        # XXX ctor returns None, rather than raising exception
+        # in order to warn consumer not to use this instance.
+        new_topic = Topic(path)
+        if not new_topic is None:
             self.children["topics"].append(new_topic)
-
-        except Exception as e:
-            #
-            # TODO store these warnings somewhere
-            #
-            pass
-            #print(e)
-
-
-    def _build_topics(self, path):
-        """ Return list of topics in subject """
-        files = []
-        for file in os.listdir(path):
-
-            file_path = os.path.join(path, file)
-
-            if fileops._is_hidden(file):
-                continue
-
-            if os.path.isfile(file_path):
-                files.append(Topic(file_path))
-
-        return files
 
 
     def _build_subjects(self, path):

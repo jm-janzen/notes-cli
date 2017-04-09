@@ -27,8 +27,7 @@ class Topic():
 
         # Skip unparsable files
         if len(name_arr) != 2:
-            # FIXME include option/instruction to add to config ignore list
-            raise Exception(f"Could not build new Topic using {path}")
+            return None
 
         path = path
         name = name_arr[0]
@@ -39,7 +38,7 @@ class Topic():
 
         # Skip files not in config ext whitelist
         if not ext in topic_exts:
-            raise Exception(f"Skipping Topic {path} because extension is being ignored")
+            return None
 
         parent = topc_arr[-2]  # subject
 

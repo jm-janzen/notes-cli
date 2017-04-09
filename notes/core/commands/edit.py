@@ -12,7 +12,7 @@ notes_dir = config.opts["notes_dir"]
 topic_exts= config.opts["prefs"]["topic"]["extensions"]
 
 def execute(args):
-    """ TODO edit given topic file using editor in config.cfg
+    """ Edit given topic file using editor in config.cfg
     for subject in Book()["index"]["subjects"]:
 
         for topic in subject.children["topics"]:
