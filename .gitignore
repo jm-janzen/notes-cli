@@ -3,3 +3,6 @@
 
 # Ignore bytecode caches
 */__pycache__/*
+
+# Ignore temp edit dir
+\.tmp/

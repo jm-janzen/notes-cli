@@ -1,6 +1,7 @@
 import os
-import tempfile
-import subprocess
+import tempfile    # For creating temp file
+import subprocess  # For editing  temp file
+import shutil      # For copying  temp file over original
 
 from .. book.book import Book
 from .. config import Config
@@ -17,8 +18,7 @@ def execute(args):
         for topic in subject.children["topics"]:
             pass
     """
-    print(f"edit({type(args)} {args})")
-
+    #print(f"edit({type(args)} {args})")
 
     try_name = args[-1]
     try_dir  = os.path.join(notes_dir, *args[:-1])
@@ -59,11 +59,13 @@ def _open_file(f):
     1) copy existing file to temp file
     2) open this temp file in editor
     3) save updates to temp file over og file
+    4) rm temp file
 
     TODO rename this func, or split it up
+    TODO only copy2 if file changed
 
     """
-    print(f"_open_file({f})")
+    #print(f"_open_file({f})")
 
     #
     # 1) Read in contents of original file
@@ -74,7 +76,7 @@ def _open_file(f):
         og_file_contents = str.encode(fp.read()) # To bytes
 
     #
-    # 2 Create, open new temp file, with contents of original file
+    # 2) Create, open new temp file, with contents of original file
     #
 
     tmp_file_prefix = f.split('/')[-1].split('.')[0] + '_'
@@ -88,9 +90,13 @@ def _open_file(f):
         tf.seek(0)
         subprocess.call([config.opts["editor"], tf.name])
 
-        tmp_file_path = os.path.join(tmp_file_dir, tmp_file_path)
+        tmp_file_path = os.path.join(tmp_file_dir, tmp_file_path, tf.name)
 
     #
-    # 3) TODO copy edits to original file, and remove temporary file
-    # use shutil.copy2 to preserve metadata
+    # 3) Copy edits to original file, and remove temporary file
     #
+    #print(f"copying {tmp_file_path} over {f}")
+    shutil.copy2(tmp_file_path, f)
+
+    # Delete temp file
+    os.remove(tmp_file_path)
