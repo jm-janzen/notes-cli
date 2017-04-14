@@ -12,8 +12,9 @@ topic_exts= config.opts["prefs"]["topic"]["extensions"]
 
 def execute(args):
     """ Look for [subject] <topic> and view """
-    #print(f"view::execute({args})")
+    print(f"view::execute({args})")
 
+    # FIXME rm these if not nessa
     try_name = args[-1]
     try_dir  = os.path.join(notes_dir, *args[:-1])
     try_path = os.path.join(notes_dir, *args)
@@ -22,18 +23,7 @@ def execute(args):
     if not os.path.isdir(try_dir):
         raise FileNotFoundError(f"{try_dir} is not a subject/directory")
 
-    #
-    # FIXME use get_topic method, rather than iter
-    #
-    found_file = None
-    for subject in Book()["index"]["subjects"]:
-
-        for topic in subject.children["topics"]:
-            if not topic.name == try_name:
-                continue
-
-            # Open file for editing, and quit
-            found_file = topic.path
+    found_file = Book().get_topic(args)
 
     if found_file is None:
 
@@ -41,7 +31,7 @@ def execute(args):
 
     else:
 
-        _view_file(found_file)
+        _view_file(found_file.path)
 
 
 def _view_file(f):

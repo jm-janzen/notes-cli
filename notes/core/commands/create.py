@@ -23,7 +23,7 @@ def execute(args):
     # FIXME use get_topic method, rather than iter
     #
     found_file = None
-    for subject in Book()["index"]["subjects"]:
+    for subject in Book().index["subjects"]:
 
         # Check if topic file already exists
         # FIXME will collide if another topic _anywhere_ of same name

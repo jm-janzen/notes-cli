@@ -26,6 +26,10 @@ def main():
         exit(1)
 
     # Pass args to our CLI module and execute
-    CLI(sys.argv)
+    try:
+        CLI(sys.argv)
+
+    except Exception as e:
+        print(f"Error executing command:\n{e}")
 
 main()
