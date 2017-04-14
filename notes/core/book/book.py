@@ -30,10 +30,14 @@ class Book(metaclass=Singleton):
         }
     """
 
-    def __new__(self):
-        self._book = BookBuilder().new_book()
-        return self._book
+    def __init__(self):
+        """ Set property book index """
+        self.__index = BookBuilder().new_book()["index"]
 
+    @property
+    def index(self):
+        """ Return index of book singleton dict """
+        return self.__index
 
     def get_topic(t):
         """ TODO return topic obj at given path obj """

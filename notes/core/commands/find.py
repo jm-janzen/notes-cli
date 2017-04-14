@@ -15,7 +15,7 @@ def execute(args):
     search_str = '|'.join(args)
 
     matching_topics = []
-    for topic in Book()["index"]["topics"]:
+    for topic in Book().index["topics"]:
         with open(topic.path) as tp:
             contents = tp.read()
 

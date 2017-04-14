@@ -5,7 +5,7 @@ from .. book.book import Book
 
 def execute(args):
     """ Print associated list of subjects and their topics """
-    for subject in Book()["index"]["subjects"]:
+    for subject in Book().index["subjects"]:
 
         # Determine whether to print subject's parent-subject, and fmt appropriately
         # FIXME notes_dir not in `~` will falsely indicate big depth numbers

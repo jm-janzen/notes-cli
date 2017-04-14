@@ -26,7 +26,7 @@ def execute(args):
     # FIXME use get_topic method, rather than iter
     #
     found_file = None
-    for subject in Book()["index"]["subjects"]:
+    for subject in Book().index["subjects"]:
 
         for topic in subject.children["topics"]:
             if not topic.name == try_name:
