@@ -39,12 +39,44 @@ class Book(metaclass=Singleton):
         """ Return index of book singleton dict """
         return self.__index
 
-    def get_topic(t):
-        """ TODO return topic obj at given path obj """
-        return t
+    def get_topic(self, path):
+        """ Return Topic obj at given path list
+        :param path: list [SUBJECT...] <TOPIC>
+        :return Topic: Topic matching given Subject-path, Topic-name
+        """
+        #print(f"Book::get_topic({path})")
 
+        # Trim topic from end
+        topc_name = path[-1]
 
-    def get_subject(s):
-        """ TODO return subject obj at given path obj """
-        return s
+        # If multiple elems, get subject to iter over child topics
+        subj_obj = None
+        if len(path) > 1:
+            subj_obj = self.get_subject(path[0:len(path)+1][-2])
+
+        # Get list of topics for final op
+        if subj_obj is None:  # Just look in index
+            topc_objs = self.__index["topics"]
+        else:  # Look in Subject's child topics
+            topc_objs = subj_obj.children["topics"]
+
+        # Build named dict of Topics for get (below)
+        d = dict((t.name, t) for t in topc_objs)
+
+        return d.get(topc_name)
+
+    def get_subject(self, subject_name):
+        """ Return subject obj at given subject name str
+        :param subject_name: str matching a Subject's name
+        :return Subject: Subject matching given str
+
+        FIXME What to do with re to duplicate Subject names?
+
+        """
+        #print(f"Book::get_subject({subject_name})")
+
+        # Build named dict of Subjects for get (below)
+        d = dict((t.name, t) for t in self.__index["subjects"])
+
+        return d.get(subject_name)
 
