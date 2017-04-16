@@ -7,12 +7,11 @@ from .. config import Config
 # Fetch notes dir from singleton
 config    = Config()
 notes_dir = config.opts["notes_dir"]
-topic_exts= config.opts["prefs"]["topic"]["extensions"]
 
 
 def execute(args):
     """ Look for [subject] <topic> and view """
-    print(f"view::execute({args})")
+    #print(f"view::execute({args})")
 
     # FIXME rm these if not nessa
     try_name = args[-1]
