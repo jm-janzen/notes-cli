@@ -1,4 +1,7 @@
+import os
+
 from .. utils.singleton import Singleton
+from .. config import Config
 from . book_builder import BookBuilder
 
 
@@ -79,4 +82,45 @@ class Book(metaclass=Singleton):
         d = dict((t.name, t) for t in self.__index["subjects"])
 
         return d.get(subject_name)
+
+    def get_parents(self, item):
+        """ Return list of parent subjects, up to notes_dir
+        :param item: Subject or Topic, having property `parents`
+        :return parents: list of parents from root to item
+        """
+        #print(f"Book::get_parents({item.name})")
+
+        return reversed(self._recurse_parents(item))
+
+    def _recurse_parents(self, item, parents=[]):
+        """ Add to item's parent(s) list
+        :param item: Subject or Topic, having property `parents`
+        :return parents: list of parents
+
+        Adds item's parent to list, then recurses to check item's
+        parent in turn has it's own parent to add, and so on...
+
+        """
+
+        # Make copy, since list type is pass-by-ref otherwise
+        parents = parents[:]
+
+        # Done
+        if (self._get_depth(item) - 1) <= 0:
+            return parents
+
+        # Continue
+        else:
+            parent_cls = self.get_subject(item.parent)
+            parents.append(parent_cls)
+            return self._recurse_parents(parent_cls, parents)
+
+
+
+    def _get_depth(self, item):
+        """ Return int number of dirs from notes_dir """
+        #print(f"Book::get_depth({item})")
+        root = Config().opts["notes_dir"].count(os.sep)
+        end  = item.path.count(os.sep)
+        return end - root
 
