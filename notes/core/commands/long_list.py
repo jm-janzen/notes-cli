@@ -28,3 +28,6 @@ def execute(args):
 
         print(prt_str)
 
+
+def help():
+    print("""-L, --long-list       list all notes, with more detail""")

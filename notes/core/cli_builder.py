@@ -22,7 +22,10 @@ class CLIBuilder:
 
             # rm missing of false flags
             if v is False or v is None:
-                rm_me.append(k)
+
+                # Help is special case, stores None, so preserve it
+                if not k == "help":
+                    rm_me.append(k)
 
             # rm empty lists (for positional args)
             elif isinstance(v, list):
@@ -45,7 +48,14 @@ class CLIBuilder:
         #TODO replace "help" here with samesuch method of command
         #
 
-        parser = argparse.ArgumentParser()
+        parser = argparse.ArgumentParser(prog="notes",
+                                         usage="%(prog)s [options]",
+                                         add_help=False)
+
+        parser.add_argument("-h", "--help",
+                            help="view topic using pager in config",
+                            nargs="?",
+                            default=argparse.SUPPRESS)
 
         parser.add_argument("view",
                             help="view topic using pager in config",
@@ -81,6 +91,7 @@ class CLIBuilder:
                             action="store_true")
 
         # If no arguments, just print usage and exit
+        # TODO replace this with out commands/help.py once stable
         if len(argv) <= 1:
             parser.print_help()
             parser.exit()

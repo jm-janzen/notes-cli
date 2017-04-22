@@ -43,6 +43,11 @@ def execute(args):
     _open_file(found_file)
 
 
+def help():
+    print("""-e EDIT [EDIT ...], --edit EDIT [EDIT ...]
+                            edit given item (topic)""")
+
+
 def _open_file(f):
     """ Open file at path in editor in config
     1) copy existing file to temp file

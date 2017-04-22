@@ -17,3 +17,6 @@ def execute(args):
             prt_str = subject.name
 
         print(prt_str)
+
+def help():
+    print("""-S, --subject-list    list all subjects""")

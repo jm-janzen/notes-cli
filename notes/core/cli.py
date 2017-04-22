@@ -12,6 +12,9 @@ class CLI:
         cli_builder = CLIBuilder()
         args = cli_builder.parse_args(argv)
 
+        # FIXME might be better to pass method={execute, help, usage} here,
+        #       and make CLIBuilder entirely responsible for formatting this.
+
         command_ctl = CommandCtl()
         command_ctl.run(args)
 

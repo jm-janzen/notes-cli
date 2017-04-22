@@ -35,3 +35,7 @@ def execute(args):
                         "--pattern="+search_str,
                         *(m.path for m in matching_topics)])
 
+
+def help():
+    print("""-f search_str [search_str ...], --find search_str [search_str ...]
+                            display topics with given str in them""")
