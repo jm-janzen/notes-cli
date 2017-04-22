@@ -35,7 +35,7 @@ class CommandCtl:
             # of expected _help(cmd).
             # If args None, this is blank help, so set to that (cmd).
             # XXX this might be a problem if we implement `--usage [cmd]`
-            self._help(cmd if (args is None) else args)
+            self._help(args or cmd)
 
         else:
             self._execute(cmd, args)
