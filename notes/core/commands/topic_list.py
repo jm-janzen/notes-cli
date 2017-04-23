@@ -13,3 +13,11 @@ def execute(args):
     # Print topics, minus extra trailing newline
     print(prt_str[:-1])
 
+
+def help():
+    print("""-T, --topic-list      list all topics""")
+
+
+def usage():
+    print("TODO")
+

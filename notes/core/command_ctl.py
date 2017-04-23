@@ -25,11 +25,24 @@ class CommandCtl:
 
 
     def run(self, args):
-        """ TODO parse args into (cmd, **args) for _execute """
+        """ Parse args into (cmd, **args) for _execute """
         #print(f"CommandCtl::run({args})")
         cmd, args = self._parse_args(args)
 
-        self._execute(cmd, args)
+        if cmd == "help":
+
+            # Key of help is actually command, so call _help(args), instead
+            # of expected _help(cmd).
+            # If args None, this is blank help, so set to that (cmd).
+            # XXX this might be a problem if we implement `--usage [cmd]`
+            self._help(args or cmd)
+
+        elif cmd == "usage":
+
+            self._usage(args or cmd)
+
+        else:
+            self._execute(cmd, args)
 
     def _parse_args(self, args):
         """ Separate cmd from *args, and ret
@@ -39,6 +52,43 @@ class CommandCtl:
         #print(f"CommandCtl::_parse_args({args})")
 
         return list(args.keys())[0], list(args.values())[0]
+
+    def _usage(self, cmd):
+        """ Pass argument to individual handlers
+        :param cmd: command/<cmd>.py::usage() to to use
+
+        TODO fix duplicated code with _execute & _help methods below
+
+        """
+        #print(f"CommandCtl::_usage({cmd})")
+
+        # Get str ref to command by name
+        c = self.scripts.get(cmd)
+
+        # Import by name at std path
+        cmd_module = importlib.import_module(f"core.commands.{c}")
+
+        # By convention, call `execute` method of imported cmd script
+        cmd_module.usage()
+
+    def _help(self, cmd):
+        """ Pass argument to individual handlers
+        :param cmd: command/<cmd>.py::help() to to use
+
+        TODO fix duplicated code with _execute method below
+
+        """
+        #print(f"CommandCtl::_help({cmd})")
+
+        # Get str ref to command by name
+        c = self.scripts.get(cmd)
+
+        # Import by name at std path
+        cmd_module = importlib.import_module(f"core.commands.{c}")
+
+        # By convention, call `execute` method of imported cmd script
+        cmd_module.help()
+
 
     def _execute(self, cmd, args):
         """ Pass argument to individual handlers

@@ -26,3 +26,12 @@ def execute(args):
             prt_str += f"  {topic.name}\n"
 
     print(prt_str, end='')
+
+
+def help():
+    print("""-l, --list            list all notes""")
+
+
+def usage():
+    print("TODO")
+

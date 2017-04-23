@@ -33,9 +33,18 @@ def execute(args):
         _view_file(found_file.path)
 
 
+def help():
+
+    print("""topic_path            view topic using pager in config""")
+
+
 def _view_file(f):
     """ View file at given path using pager in config.cfg """
     #print(f"view::_view_file({f})")
 
     subprocess.call([config.opts["viewer"], f])
+
+
+def usage():
+    print("TODO")
 
