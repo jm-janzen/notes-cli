@@ -16,3 +16,8 @@ def execute(args):
 
 def help():
     print("""-T, --topic-list      list all topics""")
+
+
+def usage():
+    print("TODO")
+

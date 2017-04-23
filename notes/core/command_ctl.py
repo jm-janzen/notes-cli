@@ -37,6 +37,10 @@ class CommandCtl:
             # XXX this might be a problem if we implement `--usage [cmd]`
             self._help(args or cmd)
 
+        elif cmd == "usage":
+
+            self._usage(args or cmd)
+
         else:
             self._execute(cmd, args)
 
@@ -48,6 +52,24 @@ class CommandCtl:
         #print(f"CommandCtl::_parse_args({args})")
 
         return list(args.keys())[0], list(args.values())[0]
+
+    def _usage(self, cmd):
+        """ Pass argument to individual handlers
+        :param cmd: command/<cmd>.py::usage() to to use
+
+        TODO fix duplicated code with _execute & _help methods below
+
+        """
+        #print(f"CommandCtl::_usage({cmd})")
+
+        # Get str ref to command by name
+        c = self.scripts.get(cmd)
+
+        # Import by name at std path
+        cmd_module = importlib.import_module(f"core.commands.{c}")
+
+        # By convention, call `execute` method of imported cmd script
+        cmd_module.usage()
 
     def _help(self, cmd):
         """ Pass argument to individual handlers

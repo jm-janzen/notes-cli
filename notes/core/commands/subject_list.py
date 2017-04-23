@@ -20,3 +20,8 @@ def execute(args):
 
 def help():
     print("""-S, --subject-list    list all subjects""")
+
+
+def usage():
+    print("TODO")
+

@@ -23,8 +23,8 @@ class CLIBuilder:
             # rm missing of false flags
             if v is False or v is None:
 
-                # Help is special case, stores None, so preserve it
-                if not k == "help":
+                # Help & Usage are special case, store None, so preserve
+                if not any(k == s for s in [ "help", "usage" ]):
                     rm_me.append(k)
 
             # rm empty lists (for positional args)
@@ -53,7 +53,15 @@ class CLIBuilder:
                                          add_help=False)
 
         parser.add_argument("-h", "--help",
-                            help="view topic using pager in config",
+                            help="print all help, or help for given command",
+                            choices=("help", "usage", "view", "find",
+                                     "edit", "create", "list"),
+                            nargs="?",
+                            default=argparse.SUPPRESS)
+        parser.add_argument("-u", "--usage",
+                            help="print more detailed help for given command",
+                            choices=("help", "usage", "view", "find",
+                                     "edit", "create", "list"),
                             nargs="?",
                             default=argparse.SUPPRESS)
 

@@ -46,6 +46,11 @@ def execute(args):
     open(os.path.join(try_path + new_topic_ext), 'a').close()
     print(f"Created topic file {try_path}{new_topic_ext}")
 
+
 def help():
     print("""-c CREATE [CREATE ...], --create CREATE [CREATE ...]
                             create given [subjects...] <topic>""")
+
+def usage():
+    print("TODO")
+

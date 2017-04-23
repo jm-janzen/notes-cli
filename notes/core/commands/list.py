@@ -30,3 +30,8 @@ def execute(args):
 
 def help():
     print("""-l, --list            list all notes""")
+
+
+def usage():
+    print("TODO")
+

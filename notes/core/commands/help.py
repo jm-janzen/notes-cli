@@ -24,3 +24,8 @@ optional arguments:
   -S, --subject-list    list all subjects"""
 
     print(prt_str)
+
+
+def usage():
+    print("TODO")
+

@@ -44,3 +44,7 @@ def _view_file(f):
 
     subprocess.call([config.opts["viewer"], f])
 
+
+def usage():
+    print("TODO")
+

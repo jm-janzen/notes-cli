@@ -31,3 +31,8 @@ def execute(args):
 
 def help():
     print("""-L, --long-list       list all notes, with more detail""")
+
+
+def usage():
+    print("TODO")
+

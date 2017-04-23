@@ -48,6 +48,10 @@ def help():
                             edit given item (topic)""")
 
 
+def usage():
+    print("TODO")
+
+
 def _open_file(f):
     """ Open file at path in editor in config
     1) copy existing file to temp file
