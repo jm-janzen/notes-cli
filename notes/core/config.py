@@ -61,6 +61,14 @@ class Config(metaclass=Singleton):
         topic_exts = list(map(str.strip, cp.get("TopicPrefs", "Extensions").split(',')))
         new_topic_ext = cp.get("TopicPrefs", "NewTopicExtension")
 
+        # Get topic, subject patterns to filter by
+        topic_ignore_pats = []
+        for pat in list(map(str.strip, cp.get("TopicPrefs", "IgnorePatterns").split(','))):
+            topic_ignore_pats.append(re.compile(pat))
+        subject_ignore_pats = []
+        for pat in list(map(str.strip, cp.get("SubjectPrefs", "IgnorePatterns").split(','))):
+            subject_ignore_pats.append(re.compile(pat))
+
         # Bundle all in obj and ret
         return {
             "notes_dir": notes_dir,
@@ -70,10 +78,10 @@ class Config(metaclass=Singleton):
                 "topic": {
                     "extensions": topic_exts,
                     "new_topic_ext": new_topic_ext,
-                    "ignore_pats": "",
+                    "ignore_pats": topic_ignore_pats,
                 },
                 "subject": {
-                    "ignore_pats": "",
+                    "ignore_pats": subject_ignore_pats,
                 }
             }
         }

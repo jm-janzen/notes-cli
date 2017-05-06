@@ -10,9 +10,6 @@ class Topic():
             ext:            mkd,
         }
     }
-
-    TODO Fix newline at the beginning of output
-
     """
 
     quack = True
