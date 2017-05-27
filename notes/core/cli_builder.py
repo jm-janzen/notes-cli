@@ -83,6 +83,9 @@ class CLIBuilder:
                             help="create given [subjects...] <topic>",
                             type=str,
                             nargs='+')
+
+        # TODO rewrite so accept N* "filter" opt
+        #      Ex: `notes -l 'trouble'`
         parser.add_argument("-l", "--list",
                             help="list all notes",
                             action="store_true")
