@@ -1,0 +1,2 @@
+#!/bin/sh
+python3 -Bu /home/jm/trees/notes-cli/notes/main.py "$@"

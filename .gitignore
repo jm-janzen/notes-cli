@@ -6,3 +6,6 @@
 
 # Ignore temp edit dir
 \.tmp/
+
+# Ignore vim swap files
+*.sw[a-p]
