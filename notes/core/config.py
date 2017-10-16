@@ -21,7 +21,14 @@ class Config(metaclass=Singleton):
 
         # Check notes dir exists
         if not os.path.isdir(c["notes_dir"]):
-            raise FileNotFoundError(f"{c['notes_dir']} is not a directory")
+
+            # Prompt for input (maybe user has not setup a notes dir)
+            if input(f'{c["notes_dir"]} not found - create it? [y|N]: ').upper() == 'Y':
+                self._create_notes_dir(c["notes_dir"])
+
+            # Or just crash, and let user handle this in their OS
+            else:
+                raise FileNotFoundError(f"{c['notes_dir']} is not a directory")
 
         # Check editor exists
         if not os.path.isfile(c["editor"]):
@@ -46,6 +53,9 @@ class Config(metaclass=Singleton):
 
     def _read_in(self, path):
         """ Read in config at path and ret basic config object """
+        # Build relative path to named config file
+        path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, path))
+
         # Prime configuration parser
         cp = ConfigParser()
         cp.read(path)
@@ -85,6 +95,11 @@ class Config(metaclass=Singleton):
                 }
             }
         }
+
+    def _create_notes_dir(self, path):
+        """ Create an empty notes dir at given path """
+        os.makedirs(path)
+        print(f"Created new (empty) notes dir: \"{path}\"")
 
     def topic_extensions_pat(self):
         """ Return regex pattern matching any acceptable topic file extension """

@@ -10,11 +10,11 @@ def main():
 
     # Validate config.cfg, init Config singleton
     try:
-        Config(os.path.join("notes", "config.cfg"))
+        Config("config.cfg")
 
     # If failure in configuration, don't even
     except Exception as e:
-        print(f"Error reading config.cfg:\n{e}")
+        print(f"Error reading config.cfg:\n\t{e}")
         exit(1)
 
     # Validate items in notes directory, init Book singleton
@@ -22,7 +22,7 @@ def main():
         Book()
 
     except Exception as e:
-        print(f"Error building notes dir:\n{e}")
+        print(f"Error building notes dir:\n\t{e}")
         exit(1)
 
     # Pass args to our CLI module and execute
@@ -30,6 +30,6 @@ def main():
         CLI(sys.argv)
 
     except Exception as e:
-        print(f"Error executing command:\n{e}")
+        print(f"Error executing command:\n\t{e}")
 
 main()

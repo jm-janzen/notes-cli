@@ -12,7 +12,8 @@ class CommandCtl:
         """ Init command packages based on individual scripts in core/commands dir """
 
         # TODO set this globally before getting here
-        command_script_dir = os.path.join("notes", "core", "commands")
+        # Build relative path to commands dir
+        command_script_dir = os.path.join(os.path.dirname(__file__), "commands")
 
         for command_script in os.listdir(command_script_dir):
             command_script_key = command_script.split('.')[0]
