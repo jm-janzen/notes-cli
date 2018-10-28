@@ -9,7 +9,6 @@ config = Config()
 
 def execute(args):
     """ Find matches in existing topics """
-    #print(f"find::execute({args})")
 
     # Collect any multiples, and interpret as OR
     search_str = '|'.join(args)
