@@ -21,7 +21,6 @@ class Subject():
 
     def __init__(self, path):
         """ Build subject obj from full path """
-        #print(f"new Subject({path})")
 
         subj_arr = path.split(os.sep)
 

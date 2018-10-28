@@ -13,7 +13,6 @@ topic_exts= config.opts["prefs"]["topic"]["extensions"]
 
 def execute(args):
     """ Edit given topic file using editor in config.cfg """
-    #print(f"edit({type(args)} {args})")
 
     try_name = args[-1]
     try_dir  = os.path.join(notes_dir, *args[:-1])

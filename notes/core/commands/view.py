@@ -11,7 +11,6 @@ notes_dir = config.opts["notes_dir"]
 
 def execute(args):
     """ Look for [subject] <topic> and view """
-    #print(f"view::execute({args})")
 
     # FIXME rm these if not nessa
     try_name = args[-1]
@@ -40,7 +39,6 @@ def help():
 
 def _view_file(f):
     """ View file at given path using pager in config.cfg """
-    #print(f"view::_view_file({f})")
 
     subprocess.call([config.opts["viewer"], f])
 

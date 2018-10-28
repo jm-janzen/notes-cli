@@ -21,7 +21,6 @@ class Topic():
              a useable object.
 
         """
-        #print(f"\tnew Topic({path})")
 
         # Fetch acceptable extensions from config
         topic_exts= Config().opts["prefs"]["topic"]["extensions"]

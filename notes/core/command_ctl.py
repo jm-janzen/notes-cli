@@ -27,7 +27,6 @@ class CommandCtl:
 
     def run(self, args):
         """ Parse args into (cmd, **args) for _execute """
-        #print(f"CommandCtl::run({args})")
         cmd, args = self._parse_args(args)
 
         if cmd == "help":
@@ -50,7 +49,6 @@ class CommandCtl:
         :param args: dict to look in
         :return cmd, args: tuple of command to run & list of extra arguments for command
         """
-        #print(f"CommandCtl::_parse_args({args})")
 
         return list(args.keys())[0], list(args.values())[0]
 
@@ -61,7 +59,6 @@ class CommandCtl:
         TODO fix duplicated code with _execute & _help methods below
 
         """
-        #print(f"CommandCtl::_usage({cmd})")
 
         # Get str ref to command by name
         c = self.scripts.get(cmd)
@@ -79,7 +76,6 @@ class CommandCtl:
         TODO fix duplicated code with _execute method below
 
         """
-        #print(f"CommandCtl::_help({cmd})")
 
         # Get str ref to command by name
         c = self.scripts.get(cmd)
@@ -96,7 +92,6 @@ class CommandCtl:
         :param cmd: command/<cmd>.py to to use
         :param args: extra arguments to pass to command - either list, or bool
         """
-        #print(f"CommandCtl::_execute({cmd}, {args})")
 
         # Get str ref to command by name
         c = self.scripts.get(cmd)

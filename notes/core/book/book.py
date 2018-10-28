@@ -47,7 +47,6 @@ class Book(metaclass=Singleton):
         :param path: list [SUBJECT...] <TOPIC>
         :return Topic: Topic matching given Subject-path, Topic-name
         """
-        #print(f"Book::get_topic({path})")
 
         # Trim topic from end
         topc_name = path[-1]
@@ -76,7 +75,6 @@ class Book(metaclass=Singleton):
         FIXME What to do with re to duplicate Subject names?
 
         """
-        #print(f"Book::get_subject({subject_name})")
 
         # Build named dict of Subjects for get (below)
         d = dict((t.name, t) for t in self.__index["subjects"])
@@ -88,7 +86,6 @@ class Book(metaclass=Singleton):
         :param item: Subject or Topic, having property `parents`
         :return parents: list of parents from root to item
         """
-        #print(f"Book::get_parents({item.name})")
 
         return reversed(self._recurse_parents(item))
 
@@ -119,7 +116,6 @@ class Book(metaclass=Singleton):
 
     def _get_depth(self, item):
         """ Return int number of dirs from notes_dir """
-        #print(f"Book::get_depth({item})")
         root = Config().opts["notes_dir"].count(os.sep)
         end  = item.path.count(os.sep)
         return end - root
